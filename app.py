@@ -3,7 +3,7 @@ from flask import Flask, render_template, jsonify, request, send_from_directory
 import image_detection 
 from logic import Sorter
 from urllib.parse import quote as url_quote
-
+import os
 app = Flask(__name__)
 
 
@@ -18,7 +18,11 @@ system_status = {
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    folder_path = os.path.join(os.getcwd(), 'sort_jsons')
+    
+    # Get the list of all .json files in the folder
+    json_files = [f.split('.')[0].capitalize().replace("_", " ") for f in os.listdir(folder_path) if f.endswith('.json')]
+    return render_template('index.html', items=json_files)
 
 @app.route('/start_process', methods=['POST'])
 def start_process():
@@ -44,6 +48,13 @@ def start_process():
     sorter.sort(system_status['deck_order'])
 
     return jsonify({"status": "Process initialized"})
+
+@app.route('/test_button', methods=['POST'])
+def test_button():
+    global system_status
+    print("testing in session.")
+    return jsonify({"status": "Test Successful"})
+
 
 # API to stop process (or reset)
 @app.route('/stop_process', methods=['POST'])

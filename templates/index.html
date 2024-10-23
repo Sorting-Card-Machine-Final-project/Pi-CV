@@ -13,8 +13,41 @@
     <div>
         <button id="start-btn">Start Process</button>
         <button id="stop-btn">Stop Process</button>
+        <button id="test-btn">Test This</button>
     </div>
+    <div>
+        <h1 class="mb-4">Dynamic Radio Buttons</h1>
 
+        <!-- Loop through the items list and create Bootstrap-styled radio buttons -->
+        <form id="optionsForm">
+            <div class="btn-group" role="group" aria-label="Dynamic Radio Buttons">
+                {% for item in items %}
+                    <!-- Radio input and label using Bootstrap btn-check structure -->
+                    <input type="radio" class="btn-check" name="options" id="option{{ loop.index }}" autocomplete="off" value="{{ item }}" {% if loop.index == 1 %} checked {% endif %}>
+                    <label class="btn btn-secondary" for="option{{ loop.index }}">{{ item }}</label>
+                {% endfor %}
+            </div>
+    
+            <button type="button" class="btn btn-primary mt-3" id="submitBtn">Sort</button>
+        </form>
+    
+        <!-- Message display area -->
+        <p class="mt-4" id="message"></p>
+    
+        <!-- Include Bootstrap JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+        <script>
+            function showSelected() {
+                const selectedOption = document.querySelector('input[name="options"]:checked');
+                if (selectedOption) {
+                    alert('Selected: ' + selectedOption.value);
+                } else {
+                    alert('No option selected');
+                }
+            }
+        </script>
+    </div>
     <h2>System Logs</h2>
     <div id="log-container" class="scroll-box"></div>
 

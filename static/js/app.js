@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => updateLogs(data.status));
     });
 
+    document.getElementById('test-btn').addEventListener('click', () => {
+        fetch('/test_button', { method: 'POST' })
+            .then(response => response.json())
+            .then(data => updateLogs(data.status));
+    });
+
     // Fetch logs and deck order every 2 seconds
     setInterval(fetchLogsAndDeckOrder, 2000);
 

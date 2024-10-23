@@ -32,7 +32,8 @@ p {
 /* Style the button */
 button {
     background-color: #b24ae2;
-    color: hsl(316, 89%, 7%);
+    color: white;
+    font-weight: bold;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
@@ -50,6 +51,38 @@ button:hover {
 button:focus {
     outline: none;
     box-shadow: 0 0 0 2px rgba(72, 137, 221, 0.5);
+}
+
+/* Hide the default radio button (round part) */
+input[type="radio"].btn-check {
+    display: none;
+}
+
+/* Style for the radio buttons' label */
+.btn-check + .btn {
+    display: inline-block;
+    width: 150px;                    /* Set a fixed width to make them rectangular */
+    height: 60px;                    /* Set a fixed height */
+    text-align: center;
+    line-height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    background-color: #b24ae2;        /* Default background color (Bootstrap's secondary color) */
+    color: white;
+    margin: 5px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover/focus */
+}
+
+/* Hover effect: Change background color on hover */
+.btn-check + .btn:hover {
+    background-color: #357abd;
+}
+
+/* Focus effect: Change background color when selected */
+.btn-check:checked + .btn {
+    background-color: #007bff;        /* Blue color when selected (Bootstrap's primary color) */
+    color: white;
 }
 
 /* Add styles for the scrollable textboxes */
